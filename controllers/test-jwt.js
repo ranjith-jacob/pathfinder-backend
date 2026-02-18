@@ -3,7 +3,6 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 
 router.get("/sign-token", (req, res) => {
-//   res.json({ message: "You are authorized!" });
     const user = {
         _id: 1,
         username: "test",
@@ -14,12 +13,9 @@ router.get("/sign-token", (req, res) => {
 });
 
 router.post("/verify-token", (req, res) => {
-    // res.json({ message: "Token is valid." });
-    // const token = req.headers.authorization;
     try {
         const token = req.headers.authorization.split(" ")[1];
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        // res.json({ token });
         res.json({ decoded });
     } catch (err) {
         res.status(401).json({ err: "Invalid token." });
